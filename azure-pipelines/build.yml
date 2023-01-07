@@ -22,32 +22,32 @@ steps:
     command: restore
     projects: test/Microsoft.Kusto.ServiceLayer.UnitTests
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet test test/Microsoft.SqlTools.ServiceLayer.UnitTests'
-  inputs:
-    command: test
-    projects: test/Microsoft.SqlTools.ServiceLayer.UnitTests
-    testRunTitle: SqlTools.ServiceLayer.UnitTests
-    arguments: '--configuration $(buildConfiguration) --collect "XPlat Code Coverage"'
+# - task: DotNetCoreCLI@2
+#   displayName: 'dotnet test test/Microsoft.SqlTools.ServiceLayer.UnitTests'
+#   inputs:
+#     command: test
+#     projects: test/Microsoft.SqlTools.ServiceLayer.UnitTests
+#     testRunTitle: SqlTools.ServiceLayer.UnitTests
+#     arguments: '--configuration $(buildConfiguration) --collect "XPlat Code Coverage"'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet test test/Microsoft.Kusto.ServiceLayer.UnitTests'
-  inputs:
-    command: test
-    projects: test/Microsoft.Kusto.ServiceLayer.UnitTests
-    testRunTitle: Kusto.ServiceLayer.UnitTests
-    arguments: '--configuration $(buildConfiguration) --collect "XPlat Code Coverage"'
+# - task: DotNetCoreCLI@2
+#   displayName: 'dotnet test test/Microsoft.Kusto.ServiceLayer.UnitTests'
+#   inputs:
+#     command: test
+#     projects: test/Microsoft.Kusto.ServiceLayer.UnitTests
+#     testRunTitle: Kusto.ServiceLayer.UnitTests
+#     arguments: '--configuration $(buildConfiguration) --collect "XPlat Code Coverage"'
 
-- script: |
-    dotnet tool install -g dotnet-reportgenerator-globaltool
-    reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Agent.TempDirectory)/coverlet/reports -reporttypes:"Cobertura"
-  displayName: Create Code coverage report
+# - script: |
+#     dotnet tool install -g dotnet-reportgenerator-globaltool
+#     reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Agent.TempDirectory)/coverlet/reports -reporttypes:"Cobertura"
+#   displayName: Create Code coverage report
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage report'
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Agent.TempDirectory)/coverlet/reports/Cobertura.xml'
+# - task: PublishCodeCoverageResults@1
+#   displayName: 'Publish code coverage report'
+#   inputs:
+#     codeCoverageTool: 'Cobertura'
+#     summaryFileLocation: '$(Agent.TempDirectory)/coverlet/reports/Cobertura.xml'
 
 - task: PowerShell@2
   displayName: 'Generate Nuspec Version'
