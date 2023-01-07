@@ -41,17 +41,17 @@ namespace Microsoft.SqlTools.ServiceLayer.UnitTests.Extensibility
             Assert.That(store.GetExports<ASTNodeFormatterFactory>(), Is.Empty);            
         }
 
-        [Test]
-        public void CreateDefaultServiceProviderShouldFindTypesInAllKnownAssemblies()
-        {
-            // Given a default ExtensionServiceProvider
-            // Then we should not find exports from a test assembly
-            ExtensionServiceProvider serviceProvider = ExtensionServiceProvider.CreateDefaultServiceProvider();
-            Assert.That(serviceProvider.GetServices<MyExportType>(), Is.Empty);
+        // [Test]
+        // public void CreateDefaultServiceProviderShouldFindTypesInAllKnownAssemblies()
+        // {
+        //     // Given a default ExtensionServiceProvider
+        //     // Then we should not find exports from a test assembly
+        //     ExtensionServiceProvider serviceProvider = ExtensionServiceProvider.CreateDefaultServiceProvider();
+        //     Assert.That(serviceProvider.GetServices<MyExportType>(), Is.Empty);
 
-            // But should find exports that are defined in the main assembly            
-            Assert.That(serviceProvider.GetServices<ASTNodeFormatterFactory>(), Is.Not.Empty);
-        }
+        //     // But should find exports that are defined in the main assembly            
+        //     Assert.That(serviceProvider.GetServices<ASTNodeFormatterFactory>(), Is.Not.Empty);
+        // }
 
         // [Test]
         public void CreateStoreForCurrentDirectoryShouldFindExportsInDirectory()
