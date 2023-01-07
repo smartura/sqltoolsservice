@@ -19,7 +19,20 @@
 		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
 	</PropertyGroup>
 
-	<Choose>
+	<PropertyGroup>
+		<PackageId>Microsoft.SqlServer.SqlToolsServiceLayer.Tool</PackageId>
+		<PackageVersion>1.1.0</PackageVersion>
+		<PackageDescription>.NET client SQL Tools Service application, usable as a dotnet tool. This package is intended to be used by internal applications only and should not be referenced directly.</PackageDescription>
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>$(AssemblyName)</ToolCommandName>
+		<PackageOutputPath>./nupkg</PackageOutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Include="**/*.cs" Exclude="**/obj/**/*.cs;Migration/**/*.cs" />
+	</ItemGroup>
+
+
+	<!-- <Choose>
 		<When Condition="'$(BUILD_DOTNET_TOOL)' == 'true'">
 			<PropertyGroup>
 				<PackageId>Microsoft.SqlServer.SqlToolsServiceLayer.Tool</PackageId>
@@ -33,7 +46,7 @@
 				<Compile Include="**/*.cs" Exclude="**/obj/**/*.cs;Migration/**/*.cs" />
 			</ItemGroup>
 		</When>
-		<Otherwise>
+		 <Otherwise>
 			<PropertyGroup>
 				<DefineConstants>$(DefineConstants);INCLUDE_MIGRATION</DefineConstants>
 			</PropertyGroup>
@@ -41,8 +54,8 @@
 				<PackageReference Include="Microsoft.SqlServer.Migration.Assessment" />
 				<Compile Include="**/*.cs" Exclude="**/obj/**/*.cs" />
 			</ItemGroup>
-		</Otherwise>
-	</Choose>
+		</Otherwise> 
+	</Choose> -->
 
 	<ItemGroup>
 		<PackageReference Include="Azure.Storage.Blobs" />
@@ -53,7 +66,7 @@
 		<PackageReference Include="Microsoft.Data.SqlClient" />
 		<PackageReference Include="Microsoft.Data.SqlClient.AlwaysEncrypted.AzureKeyVaultProvider" />
 		<PackageReference Include="Microsoft.SqlServer.Assessment" />
-		<PackageReference Include="Microsoft.SqlServer.Migration.Logins" />
+		<!-- <PackageReference Include="Microsoft.SqlServer.Migration.Logins" /> -->
 		<PackageReference Include="Microsoft.SqlServer.Management.SmoMetadataProvider" />
 		<PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" />
 		<PackageReference Include="Microsoft.SqlServer.Management.SqlParser" />
