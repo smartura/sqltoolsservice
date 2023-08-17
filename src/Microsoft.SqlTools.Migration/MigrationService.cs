@@ -114,9 +114,23 @@ namespace Microsoft.SqlTools.Migration
             this.ServiceHost.SetRequestHandler(EstablishUserMappingRequest.Type, HandleEstablishUserMapping, true);
             this.ServiceHost.SetRequestHandler(MigrateServerRolesAndSetPermissionsRequest.Type, HandleMigrateServerRolesAndSetPermissions, true);
             this.ServiceHost.SetRequestHandler(CertificateMigrationRequest.Type, HandleTdeCertificateMigrationRequest);
+            this.ServiceHost.SetRequestHandler(NetworkShareCheckBackupRequest.Type, HandleNetworkShareCheckBackupRequest, true);
             Logger.Verbose("Migration Service initialized");
         }
 
+        /// <summary>
+        /// Request handler for the certificate migration operation
+        /// </summary>
+        /// <param name="parameters">Parameters for the operation, as register during the type definition</param>
+        /// <param name="requestContext">Context provided by the framework</param>
+        /// <returns></returns>
+        internal async Task HandleNetworkShareCheckBackupRequest(
+          NetworkShareCheckBackupParams parameters,
+          RequestContext<NetworkShareCheckBackupResult> requestContext)
+        {
+            NetworkShareCheckBackupResult networkShareCheckBackupResult = new NetworkShareCheckBackupResult();
+            await requestContext.SendResult(networkShareCheckBackupResult);
+        }
 
         /// <summary>
         /// Handle request to start a migration session
@@ -932,7 +946,7 @@ namespace Microsoft.SqlTools.Migration
         }
 
         /// <summary>
-        /// Request handler for the certifica migration operation
+        /// Request handler for the certificate migration operation
         /// </summary>
         /// <param name="parameters">Parameters for the operation, as register during the type definition</param>
         /// <param name="requestContext">Context provided by the framework</param>
